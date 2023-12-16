@@ -29,3 +29,35 @@ notesRouter.post("/delete", (req, res) => {
   getDb().db().collection("notes").deleteOne({ _id: id });
   res.redirect("/");
 });
+
+//view de detalhes da nota
+
+notesRouter.get("/:id", async (req, res) => {
+  const id = new ObjectId(req.params.id);
+  const note = await getDb().db().collection("notes").findOne({ _id: id });
+  res.render("notes/detail", { note });
+});
+
+//view de edição da nota
+notesRouter.get("/edit/:id", async (req, res) => {
+  const id = new ObjectId(req.params.id);
+  const note = await getDb().db().collection("notes").findOne({ _id: id });
+  res.render("notes/edit", { note });
+});
+
+//edição de notas
+
+notesRouter.post("/update", (req, res) => {
+  const data = req.body;
+  const id = new ObjectId(data.id);
+  const title = data.title;
+  const description = data.description;
+  getDb()
+    .db()
+    .collection("notes")
+    .updateOne(
+      { _id: id },
+      { $set: { title: title, description: description } }
+    );
+  res.redirect("/");
+});
