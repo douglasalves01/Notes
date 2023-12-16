@@ -7,6 +7,27 @@ body {
   max-width: 500px;
   min-height: 375px;
 }
+
+#main-container .actions-column {
+  display: flex;
+}
+.actions-column > a {
+  height: 38px;
+}
+.title-column {
+  width: 100%;
+}
+.title-column a {
+  color: #212529;
+  text-decoration: none;
+}
+.title-column a:hover {
+  text-decoration: underline;
+}
+.btn {
+  margin-right: 12px;
+}
+
 footer {
   height: 200px;
   width: 100%;
