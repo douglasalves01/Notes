@@ -20,3 +20,12 @@ notesRouter.post("/", (req, res) => {
     .insertOne({ title: title, description: description });
   res.redirect("/");
 });
+
+//remoção tarefa
+notesRouter.post("/delete", (req, res) => {
+  const data = req.body;
+  const id = new ObjectId(data.id); //deixar o id compatível com o mongodb
+
+  getDb().db().collection("notes").deleteOne({ _id: id });
+  res.redirect("/");
+});
